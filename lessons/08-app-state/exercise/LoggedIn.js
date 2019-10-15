@@ -10,7 +10,14 @@ import User from "app/User"
 import NotFound from "app/NotFound"
 
 export default function LoggedIn() {
-  const user = null
+  const [state, dispatch] = useAppState()
+  const {user, auth} = state;
+
+  useEffect(() => {
+    fetchUser(auth.uid).then((user) => {
+      dispatch({type: 'LOAD_USER', user});
+    });
+  }, [user, auth.uid, dispatch])
 
   return user ? (
     <Fragment>

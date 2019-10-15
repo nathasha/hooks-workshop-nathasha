@@ -8,6 +8,7 @@ import { login } from "app/utils"
 // export default LoginFormFinal
 
 export default function LoginForm() {
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <form>
       <VisuallyHidden>
@@ -25,7 +26,7 @@ export default function LoginForm() {
       </VisuallyHidden>
       <input
         id="login:password"
-        type="password"
+        type={isChecked ? 'password' : 'text'}
         className="inputField"
         placeholder="Password"
       />
@@ -35,7 +36,10 @@ export default function LoginForm() {
           <input
             className="passwordCheckbox"
             type="checkbox"
-            defaultChecked={false}
+            defaultChecked={isChecked}
+            onChange={(e) => {
+              setIsChecked(!isChecked);
+            }}
           />{" "}
           show password
         </label>
